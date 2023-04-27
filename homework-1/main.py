@@ -1,4 +1,5 @@
 from src.stack import Node, Stack
+
 if __name__ == '__main__':
     n1 = Node(5, None)
     n2 = Node('a', n1)
@@ -11,8 +12,8 @@ if __name__ == '__main__':
     stack.push('data1')
     stack.push('data2')
     stack.push('data3')
-    print(stack.pop())  # data3
-    print(stack.pop())  # data2
-    print(stack.pop())  # data1
-    print(stack.pop())  # None
-    print(stack.pop().data)  # AttributeError: 'NoneType' object has no attribute 'data'
+    print(stack.top.data)  # data3
+    print(stack.top.next_node.data)  # data2
+    print(stack.top.next_node.next_node.data)  # data1
+    print(stack.top.next_node.next_node.next_node)  # None
+    print(stack.top.next_node.next_node.next_node.data)  # AttributeError: 'NoneType' object has no attribute 'data'
