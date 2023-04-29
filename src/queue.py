@@ -17,19 +17,23 @@ class Queue:
 
     def __init__(self):
         """Конструктор класса Queue"""
-        self.queue = []
         self.head = None
         self.tail = None
 
 
     def __str__(self):
         """Магический метод для строкового представления объекта"""
-        if len(self.queue) == 0:
+        if not self.head:
             return ''
-        ret = []
-        for i in self.queue:
-            ret.append(i.data)
-        return '\n'.join(ret)
+        current = self.head
+        list_objects = []
+        # в цикле добавляем в список данные из каждой ноды
+        while current.next_node:
+            list_objects.append(current.data)
+            current = current.next_node
+
+        list_objects.append(current.data) #отдельно добавляем в список данные из последней ноды, так как в цикле последняя нода проигнорируется
+        return '\n'.join(list_objects)
 
 
     def enqueue(self, data):
@@ -38,14 +42,14 @@ class Queue:
 
         :param data: данные, которые будут добавлены в очередь
         """
-
-        if len(self.queue) == 0:
-            self.head = self.tail = Node(data, None)
-            self.queue.append(self.head)
-        else:
-            self.tail = Node(data, None)
-            self.queue[-1].next_node = self.tail
-            self.queue.append(self.tail)
+        if not self.head:
+            self.head = Node(data, None)
+            return
+        current = self.head
+        while current.next_node:
+            current = current.next_node
+        current.next_node = Node(data, None)
+        self.tail = current.next_node
 
 
 
