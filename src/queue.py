@@ -11,7 +11,6 @@ class Node:
         self.next_node = next_node
 
 
-
 class Queue:
     """Класс для очереди"""
 
@@ -19,7 +18,6 @@ class Queue:
         """Конструктор класса Queue"""
         self.head = None
         self.tail = None
-
 
     def __str__(self):
         """Магический метод для строкового представления объекта"""
@@ -31,10 +29,8 @@ class Queue:
         while current.next_node:
             list_objects.append(current.data)
             current = current.next_node
-
-        list_objects.append(current.data) #отдельно добавляем в список данные из последней ноды, так как в цикле последняя нода проигнорируется
+        list_objects.append(current.data)  # отдельно добавляем в список данные из последней ноды, так как в цикле последняя нода игнорируется
         return '\n'.join(list_objects)
-
 
     def enqueue(self, data):
         """
@@ -51,12 +47,14 @@ class Queue:
         current.next_node = Node(data, None)
         self.tail = current.next_node
 
-
-
     def dequeue(self):
         """
         Метод для удаления элемента из очереди. Возвращает данные удаленного элемента
 
         :return: данные удаленного элемента
         """
-        pass
+        if not self.head:
+            return None
+        current_status = self.head
+        self.head = current_status.next_node
+        return current_status.data
